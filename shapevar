@@ -1,0 +1,25 @@
+# define H_LINE "####"
+# define V_LINE "#....#....#....#"
+
+# define H_S ".##..##"
+# define V_S "#....##....#"
+
+# define H_Z "##....##"
+# define V_Z "#...##...#"
+
+# define SQU "##...##"
+
+# define N_L "#....#....##"
+# define V_L "###..#"
+# define U_L "##....#....#"
+# define I_L "#..###"
+
+# define N_J "#....#...##"
+# define V_J "#....###"
+# define U_J "##...#....#"
+# define I_J "###....#"
+
+# define N_T "###...#"
+# define V_T ".#...##....#"
+# define U_T ".#...###"
+# define I_T "#....##...#"
