@@ -137,13 +137,37 @@ int		validate_tetrino(char **string_shape)
 	return (1);
 }
 
+/*
+**	Function will return a 2D array of trimmed tetriminos from the input file
+*/
+
+char	**trim_tetriminos(char **string_shape, int tit_count)
+{
+	int j;
+	char **return_string;
+
+	j = 0;
+	if(!(return_string = (char **)ft_memalloc(sizeof(char*) * tit_count)))
+		return (NULL);
+	while (string_shape[j] != 0 && tit_count > 0)
+	{
+		convert_to_dot(string_shape[j]);
+		return_string[j] = ft_strctrim(string_shape[j]);
+		j++;
+	}
+	return (return_string);
+}
+
 int 	main(int argc, char **argv)
 {
 	char *file_name;
 	char *buf;
 	char **tetrimino_in_file;
+	char **trimmed_tetrimino;
 	int return_value;
 	int ***test_array;
+
+	//int cord[2][4][2] = {{{0, 1}, {2, 3}, {4, 5}, {6, 7}},{{0, 1}, {2, 3}, {4, 5}, {6, 7}}};
 
 	//reads in file and checks to see if argument value is correct
 	file_name = argv[argc - 1];
@@ -163,14 +187,53 @@ int 	main(int argc, char **argv)
 	else 
 
 	//assign the tetriminos into a 2d array to validate the pieces.
-	tetrimino_in_file = ft_tet_split(buf);
+	tetrimino_in_file = (ft_tet_split(buf));
 
 	//run the validate_tet function to do a string compare against
 	//predefined tetriminos set up in ft_valid_tet.c
-	printf("%d\n", validate_tetrino((tetrimino_in_file)));
+	//printf("%d\n", validate_tetrino((tetrimino_in_file)));
+
+	//run a test on trim tetriminos
+	trimmed_tetrimino = trim_tetriminos(tetrimino_in_file, ft_tit_count(buf));
 
 	//run a test on tet_coor
-	test_array = ft_tet_coor(tetrimino_in_file, 4);
-	//printf("%d\n", test_array[0][0][0]);
+	test_array = ft_tet_coor(trimmed_tetrimino, ft_tit_count(buf));
+
+	printf(" %d,", test_array[0][0][0]);
+	printf("%d ", test_array[0][0][1]);
+	printf("%d,", test_array[0][1][0]);
+	printf("%d ", test_array[0][1][1]);
+	printf("%d,", test_array[0][2][0]);
+	printf("%d ", test_array[0][2][1]);
+	printf("%d,", test_array[0][3][0]);
+	printf("%d\n ", test_array[0][3][1]);
+
+	printf("%d,", test_array[1][0][0]);
+	printf("%d ", test_array[1][0][1]);
+	printf("%d,", test_array[1][1][0]);
+	printf("%d ", test_array[1][1][1]);
+	printf("%d,", test_array[1][2][0]);
+	printf("%d ", test_array[1][2][1]);
+	printf("%d,", test_array[1][3][0]);
+	printf("%d\n ", test_array[1][3][1]);
+
+	printf("%d,", test_array[2][0][0]);
+	printf("%d ", test_array[2][0][1]);
+	printf("%d,", test_array[2][1][0]);
+	printf("%d ", test_array[2][1][1]);
+	printf("%d,", test_array[2][2][0]);
+	printf("%d ", test_array[2][2][1]);
+	printf("%d,", test_array[2][3][0]);
+	printf("%d\n ", test_array[2][3][1]);
+
+	printf("%d,", test_array[3][0][0]);
+	printf("%d ", test_array[3][0][1]);
+	printf("%d,", test_array[3][1][0]);
+	printf("%d ", test_array[3][1][1]);
+	printf("%d,", test_array[3][2][0]);
+	printf("%d ", test_array[3][2][1]);
+	printf("%d,", test_array[3][3][0]);
+	printf("%d\n ", test_array[3][3][1]);
+
 
 }
