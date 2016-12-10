@@ -42,5 +42,6 @@ int			ft_tit_count(char const *string);
 char     	*ft_istwonew(const char *s, size_t num_words);
 char		**valid_tetrimino(void);
 int			***ft_tet_coor(char **minos, int tetri);
+int			issafe(int N, int board[N][N], int **tetri);
 
 #endif

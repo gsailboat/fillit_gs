@@ -12,7 +12,6 @@
 
 #include "libft.h"
 
-
 static int  trim(char c)
 {
 	if (c == '.' || c == '\n')

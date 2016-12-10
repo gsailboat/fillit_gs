@@ -14,7 +14,7 @@ NAME	=	libfillit.a
 CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror
 SRC		=	ft_fillit.c ft_strctrim.c ft_tet_split.c ft_tit_count.c ft_istwonew.c \
-			ft_valid_tets.c ft_tet_coor.c
+			ft_valid_tets.c ft_tet_coor.c ft_issafe.c
 
 OBJ		=	$(SRC:.c=.o)
 
@@ -30,4 +30,3 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
