@@ -15,26 +15,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int		ft_modify(char **minos, int p)
+char		*ft_modify(char *mino)
 {
-	char	*add;
+	char *periods;
 
-	add = ".";
-	if (minos[p][4] == '#')
+	if ((mino[0] == '#' && mino[4] == '#' && mino[3] == '.') || (mino[5] == '#'
+		&& mino[9] == '#'))
 	{
-		if (minos[p][3] == '#' && minos[p][5] == '#')
-		{
-			minos[p] = ft_strcat("..", minos[p]);
-			return (2);
-		}
-		else
-		{
-			minos[p] = ft_strcat(add, minos[p]);
-			return (1);
-		}
+		periods = (char*)malloc(sizeof(char) * (ft_strlen(mino) + 2));
+		ft_strcat(periods, ".");
+		periods = ft_strcat(periods, mino);
+		return (periods);
+	}
+	else if (mino[0] == '#' && mino[3] == '#' && mino[4] == '#' && mino[5] == '#')
+	{
+		periods = (char*)malloc(sizeof(char) * (ft_strlen(mino) + 3));
+		ft_strcat(periods, "..");
+		periods = ft_strcat(periods, mino);
+		return (periods);
 	}
 	else
-		return (0);
+		return (mino);
 }
 
 int    ***ft_assignmalloc(int tit_count)
@@ -47,7 +48,6 @@ int    ***ft_assignmalloc(int tit_count)
     n = 0;
     a = 0;
     j = 0;
-    tit_count = 4;
 
     cord = (int ***)ft_memalloc(sizeof(int**) * tit_count);
     while (j < tit_count)
@@ -78,19 +78,10 @@ int		***ft_tet_coor(char **minos, int tetri)
 	col_c = 0;
 	tet = 0;
 	cord = ft_assignmalloc(tetri);
-
-	// printf("%c\n", minos[0][0]);
-	// printf("%c\n", minos[0][1]);
-	// printf("%c\n", minos[0][2]);
-	// printf("%c\n", minos[0][3]);
-	// printf("%c\n", minos[0][4]);
-	// printf("%c\n", minos[0][5]);
-	// printf("%c\n", minos[0][6]);
-	// printf("%c\n", minos[0][7]);
-
 	while (tet < tetri)
 	{
-		//x = ft_modify(minos, tet);
+		minos[tet] = ft_modify(minos[tet]);
+		printf("%s\n", minos[tet]);
 		while (minos[tet][x] != '\0')
 		{
 			if (minos[tet][x] == '#'  && col_c < 4)

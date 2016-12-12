@@ -182,6 +182,7 @@ int 	main(int argc, char **argv)
 	//running the is_valid function to see if the input file is correctly 
 	//outputting valid 4x4 pieces 
 	return_value = is_valid(buf, 41);  //need to calculate buff size
+	printf("%d\n", return_value);
 	if (return_value == 0)
 		return (0);
 	else 
@@ -199,7 +200,7 @@ int 	main(int argc, char **argv)
 	//run a test on tet_coor
 	test_array = ft_tet_coor(trimmed_tetrimino, ft_tit_count(buf));
 
-	printf(" %d,", test_array[0][0][0]);
+	printf("%d,", test_array[0][0][0]);
 	printf("%d ", test_array[0][0][1]);
 	printf("%d,", test_array[0][1][0]);
 	printf("%d ", test_array[0][1][1]);
@@ -235,5 +236,138 @@ int 	main(int argc, char **argv)
 	printf("%d,", test_array[3][3][0]);
 	printf("%d\n ", test_array[3][3][1]);
 
+	printf("%d,", test_array[4][0][0]);
+	printf("%d ", test_array[4][0][1]);
+	printf("%d,", test_array[4][1][0]);
+	printf("%d ", test_array[4][1][1]);
+	printf("%d,", test_array[4][2][0]);
+	printf("%d ", test_array[4][2][1]);
+	printf("%d,", test_array[4][3][0]);
+	printf("%d\n ", test_array[4][3][1]);
 
+	printf("%d,", test_array[5][0][0]);
+	printf("%d ", test_array[5][0][1]);
+	printf("%d,", test_array[5][1][0]);
+	printf("%d ", test_array[5][1][1]);
+	printf("%d,", test_array[5][2][0]);
+	printf("%d ", test_array[5][2][1]);
+	printf("%d,", test_array[5][3][0]);
+	printf("%d\n ", test_array[5][3][1]);
+
+	printf("%d,", test_array[6][0][0]);
+	printf("%d ", test_array[6][0][1]);
+	printf("%d,", test_array[6][1][0]);
+	printf("%d ", test_array[6][1][1]);
+	printf("%d,", test_array[6][2][0]);
+	printf("%d ", test_array[6][2][1]);
+	printf("%d,", test_array[6][3][0]);
+	printf("%d\n ", test_array[6][3][1]);
+
+	printf("%d,", test_array[7][0][0]);
+	printf("%d ", test_array[7][0][1]);
+	printf("%d,", test_array[7][1][0]);
+	printf("%d ", test_array[7][1][1]);
+	printf("%d,", test_array[7][2][0]);
+	printf("%d ", test_array[7][2][1]);
+	printf("%d,", test_array[7][3][0]);
+	printf("%d\n ", test_array[7][3][1]);
+
+	printf("%d,", test_array[8][0][0]);
+	printf("%d ", test_array[8][0][1]);
+	printf("%d,", test_array[8][1][0]);
+	printf("%d ", test_array[8][1][1]);
+	printf("%d,", test_array[8][2][0]);
+	printf("%d ", test_array[8][2][1]);
+	printf("%d,", test_array[8][3][0]);
+	printf("%d\n ", test_array[8][3][1]);
+
+	printf("%d,", test_array[9][0][0]);
+	printf("%d ", test_array[9][0][1]);
+	printf("%d,", test_array[9][1][0]);
+	printf("%d ", test_array[9][1][1]);
+	printf("%d,", test_array[9][2][0]);
+	printf("%d ", test_array[9][2][1]);
+	printf("%d,", test_array[9][3][0]);
+	printf("%d\n ", test_array[9][3][1]);
+
+	printf("%d,", test_array[10][0][0]);
+	printf("%d ", test_array[10][0][1]);
+	printf("%d,", test_array[10][1][0]);
+	printf("%d ", test_array[10][1][1]);
+	printf("%d,", test_array[10][2][0]);
+	printf("%d ", test_array[10][2][1]);
+	printf("%d,", test_array[10][3][0]);
+	printf("%d\n ", test_array[10][3][1]);
+
+	printf("%d,", test_array[11][0][0]);
+	printf("%d ", test_array[11][0][1]);
+	printf("%d,", test_array[11][1][0]);
+	printf("%d ", test_array[11][1][1]);
+	printf("%d,", test_array[11][2][0]);
+	printf("%d ", test_array[11][2][1]);
+	printf("%d,", test_array[11][3][0]);
+	printf("%d\n ", test_array[11][3][1]);
+
+	printf("%d,", test_array[12][0][0]);
+	printf("%d ", test_array[12][0][1]);
+	printf("%d,", test_array[12][1][0]);
+	printf("%d ", test_array[12][1][1]);
+	printf("%d,", test_array[12][2][0]);
+	printf("%d ", test_array[12][2][1]);
+	printf("%d,", test_array[12][3][0]);
+	printf("%d\n ", test_array[12][3][1]);
+
+	printf("%d,", test_array[13][0][0]);
+	printf("%d ", test_array[13][0][1]);
+	printf("%d,", test_array[13][1][0]);
+	printf("%d ", test_array[13][1][1]);
+	printf("%d,", test_array[13][2][0]);
+	printf("%d ", test_array[13][2][1]);
+	printf("%d,", test_array[13][3][0]);
+	printf("%d\n ", test_array[13][3][1]);
+
+	printf("%d,", test_array[14][0][0]);
+	printf("%d ", test_array[14][0][1]);
+	printf("%d,", test_array[14][1][0]);
+	printf("%d ", test_array[14][1][1]);
+	printf("%d,", test_array[14][2][0]);
+	printf("%d ", test_array[14][2][1]);
+	printf("%d,", test_array[14][3][0]);
+	printf("%d\n ", test_array[14][3][1]);
+
+	printf("%d,", test_array[15][0][0]);
+	printf("%d ", test_array[15][0][1]);
+	printf("%d,", test_array[15][1][0]);
+	printf("%d ", test_array[15][1][1]);
+	printf("%d,", test_array[15][2][0]);
+	printf("%d ", test_array[15][2][1]);
+	printf("%d,", test_array[15][3][0]);
+	printf("%d\n ", test_array[15][3][1]);
+
+	printf("%d,", test_array[16][0][0]);
+	printf("%d ", test_array[16][0][1]);
+	printf("%d,", test_array[16][1][0]);
+	printf("%d ", test_array[16][1][1]);
+	printf("%d,", test_array[16][2][0]);
+	printf("%d ", test_array[16][2][1]);
+	printf("%d,", test_array[16][3][0]);
+	printf("%d\n ", test_array[16][3][1]);
+
+	printf("%d,", test_array[17][0][0]);
+	printf("%d ", test_array[17][0][1]);
+	printf("%d,", test_array[17][1][0]);
+	printf("%d ", test_array[17][1][1]);
+	printf("%d,", test_array[17][2][0]);
+	printf("%d ", test_array[17][2][1]);
+	printf("%d,", test_array[17][3][0]);
+	printf("%d\n ", test_array[17][3][1]);
+
+	printf("%d,", test_array[18][0][0]);
+	printf("%d ", test_array[18][0][1]);
+	printf("%d,", test_array[18][1][0]);
+	printf("%d ", test_array[18][1][1]);
+	printf("%d,", test_array[18][2][0]);
+	printf("%d ", test_array[18][2][1]);
+	printf("%d,", test_array[18][3][0]);
+	printf("%d\n ", test_array[18][3][1]);
 }
