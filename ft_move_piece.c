@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printsolution.c                                 :+:      :+:    :+:   */
+/*   ft_move_piece.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpatel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/09 21:51:44 by bpatel            #+#    #+#             */
-/*   Updated: 2016/12/09 22:17:05 by bpatel           ###   ########.fr       */
+/*   Created: 2016/12/11 14:36:56 by bpatel            #+#    #+#             */
+/*   Updated: 2016/12/11 14:38:44 by bpatel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft.h"
-#include <stdio.h>
 
-/*
-** Prints out the board once the solver returns a true value. 
+/* 
+** will move the piece if the function isSafe returns (0)
 */
 
-void	printSolution(int N, char **board)
+void	movePiece()
 {
-	int i = 0;
-	int j = 0;
-	while (i < N)
-	{
-		while (j < N)
-		{
-			printf("%c", board[i][j]);
-		}
-		printf("\n");
-	}
+
+
 }
+

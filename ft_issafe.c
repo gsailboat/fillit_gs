@@ -12,6 +12,23 @@
 
 #include "fillit.h"
 #include "libft.h"
+#include <stdio.h>
+
+/* 
+** return the length of the board size
+*/
+
+int board_size(char **board)
+{
+	int i;
+
+	i = 0;
+	while (board[0][i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
 
 /*
 ** Checks to see if the tetrimino overlaps any other pieces and is within the bounds
@@ -26,10 +43,8 @@
 //char **piece_2 = {{0,1},{0,2},{0,3},{0,4}};
 //
 
-int	issafe(int N, int board[N][N], int **tetri)
+int	isSafe(char **board, int **tetri, int row, int col)
 {
-	int row;
-	int col;
 	int piece;
 
 	row = 0;
@@ -40,8 +55,10 @@ int	issafe(int N, int board[N][N], int **tetri)
 		//obtain the coordinates of the piece
 		row = tetri[piece][0]; 
 		col = tetri[piece][1];
-		if (board[row][col])
+		//printf("%d %d\n", row, col);
+		if (board[row][col] != '0')
 			return (0);
+		piece++;
 	}
 	return (1);
 }

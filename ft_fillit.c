@@ -198,42 +198,8 @@ int 	main(int argc, char **argv)
 
 	//run a test on tet_coor
 	test_array = ft_tet_coor(trimmed_tetrimino, ft_tit_count(buf));
+	solveTetrimino(ft_tit_count(buf), 4, test_array);
 
-	printf(" %d,", test_array[0][0][0]);
-	printf("%d ", test_array[0][0][1]);
-	printf("%d,", test_array[0][1][0]);
-	printf("%d ", test_array[0][1][1]);
-	printf("%d,", test_array[0][2][0]);
-	printf("%d ", test_array[0][2][1]);
-	printf("%d,", test_array[0][3][0]);
-	printf("%d\n ", test_array[0][3][1]);
-
-	printf("%d,", test_array[1][0][0]);
-	printf("%d ", test_array[1][0][1]);
-	printf("%d,", test_array[1][1][0]);
-	printf("%d ", test_array[1][1][1]);
-	printf("%d,", test_array[1][2][0]);
-	printf("%d ", test_array[1][2][1]);
-	printf("%d,", test_array[1][3][0]);
-	printf("%d\n ", test_array[1][3][1]);
-
-	printf("%d,", test_array[2][0][0]);
-	printf("%d ", test_array[2][0][1]);
-	printf("%d,", test_array[2][1][0]);
-	printf("%d ", test_array[2][1][1]);
-	printf("%d,", test_array[2][2][0]);
-	printf("%d ", test_array[2][2][1]);
-	printf("%d,", test_array[2][3][0]);
-	printf("%d\n ", test_array[2][3][1]);
-
-	printf("%d,", test_array[3][0][0]);
-	printf("%d ", test_array[3][0][1]);
-	printf("%d,", test_array[3][1][0]);
-	printf("%d ", test_array[3][1][1]);
-	printf("%d,", test_array[3][2][0]);
-	printf("%d ", test_array[3][2][1]);
-	printf("%d,", test_array[3][3][0]);
-	printf("%d\n ", test_array[3][3][1]);
 
 
 }
