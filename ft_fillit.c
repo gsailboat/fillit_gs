@@ -10,10 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/* 
-** allowed functions exit, open, close, write, read, malloc, free
-*/
-
 #include <stdio.h>
 #include <fcntl.h>
 #include "libft.h"
@@ -21,8 +17,7 @@
 
 #define BUF_SIZE 4000
 
-
-char **valid_tets;
+//char **valid_tets; <-- clear out variable if not needed.
 
 /*
 **	Read information from a fixed file called "valid_1"
@@ -86,8 +81,9 @@ int	is_valid(char *file, size_t file_buffer)
 	return (1);
 }
 
-/*	Function will convert each new line char into a dot to determine
-**	shape of the piece
+/*	
+** Function will convert each new line char into a dot to determine
+** shape of the piece
 */
 
 void	*convert_to_dot(char *string_tetrino)
@@ -128,8 +124,6 @@ int		validate_tetrino(char **string_shape)
 				return (0);
 			if (ft_strcmp(ft_strctrim(string_shape[j]), valid_tets[i]) == 0)
 				break;
-			// printf("%s\n", (valid_tets[i]));
-			// printf("%d\n", i);
 			i++;
 		}
 		j++;
@@ -167,7 +161,6 @@ int 	main(int argc, char **argv)
 	int return_value;
 	int ***test_array;
 
-	//int cord[2][4][2] = {{{0, 1}, {2, 3}, {4, 5}, {6, 7}},{{0, 1}, {2, 3}, {4, 5}, {6, 7}}};
 
 	//reads in file and checks to see if argument value is correct
 	file_name = argv[argc - 1];
@@ -191,7 +184,7 @@ int 	main(int argc, char **argv)
 
 	//run the validate_tet function to do a string compare against
 	//predefined tetriminos set up in ft_valid_tet.c
-	//printf("%d\n", validate_tetrino((tetrimino_in_file)));
+	validate_tetrino((tetrimino_in_file));
 
 	//run a test on trim tetriminos
 	trimmed_tetrimino = trim_tetriminos(tetrimino_in_file, ft_tit_count(buf));
@@ -199,7 +192,5 @@ int 	main(int argc, char **argv)
 	//run a test on tet_coor
 	test_array = ft_tet_coor(trimmed_tetrimino, ft_tit_count(buf));
 	mainSolver(ft_tit_count(buf), test_array);
-
-
 
 }

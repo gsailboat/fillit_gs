@@ -37,11 +37,11 @@ int board_size(char **board)
 ** pieces. If space is not '0', False will be returned. 
 */
 
-//Function should look at the passed through coordinate values and see if there is 
-//something there
-//char **piece_1 = {{0,0},{1,0},{2,0},{3,0}};
-//char **piece_2 = {{0,1},{0,2},{0,3},{0,4}};
-//
+/* Function should look at the passed through coordinate values and see if there is 
+** something there
+** char **piece_1 = {{0,0},{1,0},{2,0},{3,0}};
+** char **piece_2 = {{0,1},{0,2},{0,3},{0,4}};
+*/
 
 int	isSafe(char **board, int **tetri, int row, int col)
 {

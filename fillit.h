@@ -36,6 +36,21 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+struct board
+{
+	char **board;
+	int N;
+} board;
+
+struct tetriminos
+{
+	int row;
+	int col;
+	int	tet_num;
+	int total_tets;
+	int **tetriminos;	
+} tets;
+
 char		*ft_strctrim(const char *s);
 char		**ft_tet_split(const char *s);
 int			ft_tit_count(char const *string);

@@ -218,7 +218,12 @@ int mainSolver(int num_of_tetriminos)
     }
     else 
     {
-        n = n + 1; 
+        n = n + 1; <--increase grid size
         solver(int n);
     }
 }
+
+
+
+
+
