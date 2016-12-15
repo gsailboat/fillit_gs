@@ -18,16 +18,22 @@
 ** Prints out the board once the solver returns a true value. 
 */
 
-void	printSolution(int N, char **board)
+void	printSolution(int N, char **grid)
 {
-	int i = 0;
-	int j = 0;
-	while (i < N)
-	{
-		while (j < N)
-		{
-			printf("%c", board[i][j]);
-		}
-		printf("\n");
-	}
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    while (i < N)
+    {
+        while(j < N)
+        {
+            printf("%c", grid[i][j]);
+            j++;
+        }
+        printf("\n");
+        j = 0;
+        i++;
+    }
 }
