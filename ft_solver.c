@@ -50,7 +50,7 @@ int isValid(int row, int col, int **tetrimino, char **board, int N)
   //will add the row and column to the tetrimino pieces -> check to see if they are not 
   //outside the board bounds && will also check to see if coordinates of pieces are currently
   //set to '0' -> will return (1) if conditions are met else return (0)
-
+	printf("%s\n", "Enter IsValid");
     int piece;
     int c_row;
     int c_col;
@@ -58,20 +58,39 @@ int isValid(int row, int col, int **tetrimino, char **board, int N)
     piece = 0;
     c_row = 0;
     c_col = 0;
+
+    printf("%d,", tetrimino[0][0]);
+    printf("%d ", tetrimino[0][1]);
+    printf("%d,", tetrimino[1][0]);
+    printf("%d ", tetrimino[1][1]);
+    printf("%d,", tetrimino[2][0]);
+    printf("%d ", tetrimino[2][1]);
+    printf("%d,", tetrimino[3][0]);
+    printf("%d\n ", tetrimino[3][1]);
+
+    if(!tetrimino)
+    	return (0);
+
     while (piece < 4)
     {
         //obtain the coordinates of the piece
-        row = tetrimino[piece][0]; 
-        col = tetrimino[piece][1];
+        c_row = tetrimino[piece][0]; 
+        c_col = tetrimino[piece][1];
         //printf("%d %d\n", row, col);
         if (board[c_row + row][c_col + col] != '0')
+        {
+        	printf("%s\n", "return false");
             return (0);
+        }
         if ((c_row + row) >= N || (c_col + col) >= N)
+        {
+        	printf("%s\n", "return false2");
             return(0);
+        }
         piece++;
     }
+    printf("%s\n", "return true");
     return (1);
-
 }
 
 int placeTetrimino(int ***tetriminos, int N, char **board, int i)
@@ -81,19 +100,21 @@ int placeTetrimino(int ***tetriminos, int N, char **board, int i)
     //if false run clearTetrimino for current piece 
     //move to the next row if column hits bounds
     //returns false if not complete 
-
+	printf("enter placeTet: %d\n ", i);
     int row;
     int col;
 
     row = 0;
     col = 0;
 
+    if (!tetriminos[i]) //base case
+    	return (1);
 
     while (row < N)
     {
         while (col < N)
         {
-            if (isValid(row, col, tetriminos[i], board, N))
+            if (isValid(row, col, tetriminos[i], board, N)) //calling the wrong shit! need to find a way to call with same params
             {
             	printf("valid has passed the loop: %d\n ", i);
                 board[row + tetriminos[i][0][0]][col + tetriminos[i][0][1]] = i + 'A';
@@ -101,14 +122,15 @@ int placeTetrimino(int ***tetriminos, int N, char **board, int i)
                 board[row + tetriminos[i][2][0]][col + tetriminos[i][2][1]] = i + 'A';
                 board[row + tetriminos[i][3][0]][col + tetriminos[i][3][1]] = i + 'A';
                 printSolution(N, board);
-                if (placeTetrimino(tetriminos, N, board, i + 1)) //calling the wrong shit! need to find a way to call with same params
+                if (placeTetrimino(tetriminos, N, board, i + 1)) 
                     return (1);
-                board[row + tetriminos[i][0][0]][col + tetriminos[i][0][1]] = i + '0';
-                board[row + tetriminos[i][1][0]][col + tetriminos[i][1][1]] = i + '0';
-                board[row + tetriminos[i][2][0]][col + tetriminos[i][2][1]] = i + '0';
-                board[row + tetriminos[i][3][0]][col + tetriminos[i][3][1]] = i + '0';
+               	printf("valid is deleting tet: %d\n ", i);
+                board[row + tetriminos[i][0][0]][col + tetriminos[i][0][1]] = '0';
+                board[row + tetriminos[i][1][0]][col + tetriminos[i][1][1]] = '0';
+                board[row + tetriminos[i][2][0]][col + tetriminos[i][2][1]] = '0';
+                board[row + tetriminos[i][3][0]][col + tetriminos[i][3][1]] = '0';
             }
-            col++;
+        col++;
         }
         col = 0;
         row++;
@@ -165,11 +187,11 @@ int mainSolver(int num_tets, int ***tetriminos)
     {
         return (1);
     }
-    // else 
-    // {
-    //     N = N + 1; 
-    //     solver(N,tetriminos,num_tets);
-    // }
+    else 
+    {
+        N = N + 1; 
+        solver(N,tetriminos);
+    }
     return (0);
 }
 
