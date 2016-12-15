@@ -50,7 +50,7 @@ int isValid(int row, int col, int **tetrimino, char **board, int N)
   //will add the row and column to the tetrimino pieces -> check to see if they are not 
   //outside the board bounds && will also check to see if coordinates of pieces are currently
   //set to '0' -> will return (1) if conditions are met else return (0)
-	printf("%s\n", "Enter IsValid");
+	printf("Enter IsValid row:%d col:%d  ", row, col);
     int piece;
     int c_row;
     int c_col;
@@ -77,15 +77,15 @@ int isValid(int row, int col, int **tetrimino, char **board, int N)
         c_row = tetrimino[piece][0]; 
         c_col = tetrimino[piece][1];
         //printf("%d %d\n", row, col);
-        if (board[c_row + row][c_col + col] != '0')
-        {
-        	printf("%s\n", "return false");
-            return (0);
-        }
         if ((c_row + row) >= N || (c_col + col) >= N)
         {
         	printf("%s\n", "return false2");
             return(0);
+        }
+        if (board[c_row + row][c_col + col] != '0')
+        {
+        	printf("%s\n", "return false");
+            return (0);
         }
         piece++;
     }
@@ -116,7 +116,7 @@ int placeTetrimino(int ***tetriminos, int N, char **board, int i)
         {
             if (isValid(row, col, tetriminos[i], board, N)) //calling the wrong shit! need to find a way to call with same params
             {
-            	printf("valid has passed the loop: %d\n ", i);
+            	printf("valid has passed the loop: %d row: %d col: %d\n ", i, row, col);
                 board[row + tetriminos[i][0][0]][col + tetriminos[i][0][1]] = i + 'A';
                 board[row + tetriminos[i][1][0]][col + tetriminos[i][1][1]] = i + 'A';
                 board[row + tetriminos[i][2][0]][col + tetriminos[i][2][1]] = i + 'A';
