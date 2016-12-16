@@ -21,7 +21,6 @@
 
 char **createGrid(int N)
 {
-
     int i;
     int j;
     char **grid;
@@ -32,15 +31,54 @@ char **createGrid(int N)
     while (i < N)
     {
         grid[i] = (char *)ft_memalloc(sizeof(char) * N);
-        grid[i][j] = '0';
+        grid[i][j] = '.';
         while(j++ < N)
         {
-            grid[i][j] = '0';
+            grid[i][j] = '.';
         }
         j = 0;
         i++;
     }
     return (grid);
+}
+
+struct b createSGrid(int N, struct b board)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    board.bd = (char **)ft_memalloc(sizeof(char*) * N);
+    while (i < N)
+    {
+        board.bd[i] = (char *)ft_memalloc(sizeof(char) * N);
+        board.bd[i][j] = '.';
+        while(j++ < N)
+        {
+            board.bd[i][j] = '.';
+        }
+        j = 0;
+        i++;
+    }
+    return (board);
+}
+
+struct b createBoard(int num_tets)
+{
+	struct b board;
+	int tot_pieces;
+	int N;
+
+	tot_pieces = num_tets * 4;
+    N = 2;  
+    while (N * N < tot_pieces)
+    {
+        N += 1;
+    }
+	board.b_size = N;
+	board = createSGrid(N,board);
+    return (board);
 }
 
 /* Will check to see if the placement of the piece is within the 
@@ -53,27 +91,17 @@ char **createGrid(int N)
 ** set to '0' -> will return (1) if conditions are met else return (0)
 */
 
-int isValid(int row, int col, int **tetrimino, char **board, int N)
+int isValid(int row, int col, int **tetrimino, struct b grid)
 {
-
-	printf("Enter IsValid row:%d col:%d  ", row, col);
     int piece;
     int c_row;
     int c_col;
+    int N;
 
+    N = grid.b_size;
     piece = 0;
     c_row = 0;
     c_col = 0;
-
-    printf("%d,", tetrimino[0][0]);
-    printf("%d ", tetrimino[0][1]);
-    printf("%d,", tetrimino[1][0]);
-    printf("%d ", tetrimino[1][1]);
-    printf("%d,", tetrimino[2][0]);
-    printf("%d ", tetrimino[2][1]);
-    printf("%d,", tetrimino[3][0]);
-    printf("%d\n ", tetrimino[3][1]);
-
     if (!tetrimino)
     	return (0);
     while (piece < 4)
@@ -81,18 +109,11 @@ int isValid(int row, int col, int **tetrimino, char **board, int N)
         c_row = tetrimino[piece][0]; 
         c_col = tetrimino[piece][1];
         if ((c_row + row) >= N || (c_col + col) >= N)
-        {
-        	printf("%s\n", "return false2");
             return(0);
-        }
-        if (board[c_row + row][c_col + col] != '0')
-        {
-        	printf("%s\n", "return false");
+        if (grid.bd[c_row + row][c_col + col] != '.')
             return (0);
-        }
         piece++;
     }
-    printf("%s\n", "return true");
     return (1);
 }
 
@@ -104,38 +125,33 @@ int isValid(int row, int col, int **tetrimino, char **board, int N)
 ** returns false if not complete 
 */
 
-int placeTetrimino(int ***tetriminos, int N, char **board, int i)
+int placeTetrimino(int ***tetriminos, struct b grid, int i, int num_tets)
 {
-
-	printf("enter placeTet: %d\n ", i);
     int row;
     int col;
-    int array_size;
+    int N;
 
+    N = grid.b_size;
     row = 0;
     col = 0;
-    if (!tetriminos[i]) //base case <- need to fix in order for tetriminos printed to equal num_tet
+    if (num_tets == i)
     	return (1);
-
     while (row < N)
     {
         while (col < N)
         {
-            if (isValid(row, col, tetriminos[i], board, N))
+            if (isValid(row, col, tetriminos[i], grid))
             {
-            	printf("valid has passed the loop: %d row: %d col: %d\n ", i, row, col);
-                board[row + tetriminos[i][0][0]][col + tetriminos[i][0][1]] = i + 'A';
-                board[row + tetriminos[i][1][0]][col + tetriminos[i][1][1]] = i + 'A';
-                board[row + tetriminos[i][2][0]][col + tetriminos[i][2][1]] = i + 'A';
-                board[row + tetriminos[i][3][0]][col + tetriminos[i][3][1]] = i + 'A';
-                printSolution(N, board);
-                if (placeTetrimino(tetriminos, N, board, i + 1)) 
+                grid.bd[row + tetriminos[i][0][0]][col + tetriminos[i][0][1]] = i + 'A';
+                grid.bd[row + tetriminos[i][1][0]][col + tetriminos[i][1][1]] = i + 'A';
+                grid.bd[row + tetriminos[i][2][0]][col + tetriminos[i][2][1]] = i + 'A';
+                grid.bd[row + tetriminos[i][3][0]][col + tetriminos[i][3][1]] = i + 'A';
+                if (placeTetrimino(tetriminos, grid, i + 1, num_tets)) 
                     return (1);
-               	printf("valid is deleting tet: %d\n ", i);
-                board[row + tetriminos[i][0][0]][col + tetriminos[i][0][1]] = '0';
-                board[row + tetriminos[i][1][0]][col + tetriminos[i][1][1]] = '0';
-                board[row + tetriminos[i][2][0]][col + tetriminos[i][2][1]] = '0';
-                board[row + tetriminos[i][3][0]][col + tetriminos[i][3][1]] = '0';
+                grid.bd[row + tetriminos[i][0][0]][col + tetriminos[i][0][1]] = '.';
+                grid.bd[row + tetriminos[i][1][0]][col + tetriminos[i][1][1]] = '.';
+                grid.bd[row + tetriminos[i][2][0]][col + tetriminos[i][2][1]] = '.';
+                grid.bd[row + tetriminos[i][3][0]][col + tetriminos[i][3][1]] = '.';
             }
         col++;
         }
@@ -143,7 +159,6 @@ int placeTetrimino(int ***tetriminos, int N, char **board, int i)
         row++;
     }
     return (0);
-
 }
 
 /* 
@@ -151,40 +166,25 @@ int placeTetrimino(int ***tetriminos, int N, char **board, int i)
 ** loop through columns first to see isValid
 */
 
-int solver(int N, int ***tetriminos)
+int solver(int num_tets, int ***tetriminos)
 {
-    char **board;
-    board = createGrid(N);
+    struct b board;
+    int N;
+
+    N = 6;
+    board = createBoard(num_tets);
     int i;
 
     i = 0;
-    if (placeTetrimino(tetriminos, N, board, i) == 1)
+    if (placeTetrimino(tetriminos, board, i, num_tets) == 1)
     {
-    	printf("%s", "shit returned 1, now print out the board.");
     	printSolution(N, board);
     	return(1);
     }
-    printf("%s", "shit didn't work. Keep debugging!.");
-    return (0);
-}
-
-int mainSolver(int num_tets, int ***tetriminos)
-{
-    int tot_pieces;
-    int N;
-
-    tot_pieces = num_tets * 4;
-    N = 2;  
-    while (N * N < tot_pieces)
-    {
-        N += 1;
-    }
-    if (solver(N,tetriminos) == 1)
-        return (1);
     else 
     {
         N = N + 1; 
-        solver(N,tetriminos);
+        solver(num_tets, tetriminos);
     }
     return (0);
 }

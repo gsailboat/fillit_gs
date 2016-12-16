@@ -191,6 +191,6 @@ int 	main(int argc, char **argv)
 
 	//run a test on tet_coor
 	test_array = ft_tet_coor(trimmed_tetrimino, ft_tit_count(buf));
-	mainSolver(ft_tit_count(buf), test_array);
+	solver(ft_tit_count(buf), test_array);
 
 }

@@ -18,7 +18,7 @@
 ** Prints out the board once the solver returns a true value. 
 */
 
-void	printSolution(int N, char **grid)
+void	printSolution(int N, struct b grid)
 {
     int i;
     int j;
@@ -29,7 +29,7 @@ void	printSolution(int N, char **grid)
     {
         while(j < N)
         {
-            printf("%c", grid[i][j]);
+            printf("%c", grid.bd[i][j]);
             j++;
         }
         printf("\n");

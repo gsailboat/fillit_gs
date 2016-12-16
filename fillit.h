@@ -36,11 +36,11 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-struct board
+struct b
 {
-	char **board;
-	int N;
-} board;
+	char **bd;
+	int b_size;
+};
 
 struct tetriminos
 {
@@ -58,8 +58,8 @@ char     	*ft_istwonew(const char *s, size_t num_words);
 char		**valid_tetrimino(void);
 int			***ft_tet_coor(char **minos, int tetri);
 int			isSafe(char **board, int **tetri, int row, int col);
-int 		mainSolver(int num_tets, int ***tetriminos);
-void		printSolution(int N, char **grid);
+int 		solver(int num_tets, int ***tetriminos);
+void		printSolution(int N, struct b grid);
 int 		board_size(char **board);
 
 #endif
