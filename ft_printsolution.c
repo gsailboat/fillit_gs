@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_valid_tets.c                                    :+:      :+:    :+:   */
+/*   ft_printsolution.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpatel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 17:18:28 by bpatel            #+#    #+#             */
-/*   Updated: 2016/12/16 14:51:34 by gselbo           ###   ########.fr       */
+/*   Created: 2016/12/09 21:51:44 by bpatel            #+#    #+#             */
+/*   Updated: 2016/12/09 22:17:05 by bpatel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,26 @@
 #include "libft.h"
 #include <stdio.h>
 
+/*
+** Prints out the board once the solver returns a true value. 
+*/
 
-char	**valid_tetrimino(void)
+void	printSolution(int N, struct b grid)
 {
-	char **valid_tet_test;
-	char *array = "####?#....#....#....#?##..##?#....##....#?##....##?#...##...#?\
-	##...##?#....#....##?###..#?##....#....#?#..###?#....#...##?#....###?##...#....#?\
-	###....#?###...#?#...##....#?#...###?#....##...#?";
+    int i;
+    int j;
 
-	valid_tet_test = ft_strsplit(array, '?');
-	return (valid_tet_test);
- }
+    i = 0;
+    j = 0;
+    while (i < N)
+    {
+        while(j < N)
+        {
+            printf("%c", grid.bd[i][j]);
+            j++;
+        }
+        printf("\n");
+        j = 0;
+        i++;
+    }
+}

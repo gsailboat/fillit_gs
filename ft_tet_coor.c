@@ -6,7 +6,7 @@
 /*   By: gselbo <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 19:50:21 by gselbo            #+#    #+#             */
-/*   Updated: 2016/12/07 19:50:25 by gselbo           ###   ########.fr       */
+/*   Updated: 2016/12/16 13:24:19 by gselbo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,42 +62,32 @@ int    ***ft_assignmalloc(int tit_count)
     	j++;
     }
     return (cord);
-
 }
 
 int		***ft_tet_coor(char **minos, int tetri)
 {
 	int x;
-	int y;
 	int col_c;
 	int tet;
 	int ***cord;
 
-	x = 0;
-	y = 0;
-	col_c = 0;
 	tet = 0;
 	cord = ft_assignmalloc(tetri);
 	while (tet < tetri)
 	{
+		x = 0;
+		col_c = -1;
 		minos[tet] = ft_modify(minos[tet]);
-		printf("%s\n", minos[tet]);
 		while (minos[tet][x] != '\0')
 		{
-			if (minos[tet][x] == '#'  && col_c < 4)
+			if (minos[tet][x] == '#'  && ++col_c < 4)
 			{
-				cord[tet][col_c][0] = y;
+				cord[tet][col_c][0] = x / 5;
 				cord[tet][col_c][1] = x % 5;
-				col_c++;
 			}
 			x++;
-			if (x % 5 == 0)
-				y++;
 		}
 	tet++;
-	x = 0;
-	y = 0;
-	col_c = 0;
 	}
 	return (cord);
 }
