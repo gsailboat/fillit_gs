@@ -15,32 +15,23 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+void    free_map(struct b board)
+{
+    int i;
+
+    i = 0;
+    while (i < board.b_size)
+    {
+            ft_memdel((void **)&(board.bd[i]));
+            i++;
+    }
+    ft_memdel((void **)&(board.bd));
+    ft_memdel((void **)&board);
+}
+
 /* creates grid based off minimium N value that is 
 ** calculated by tetrimino pieces. Returns a grid filled with 'O'
 */
-
-char **createGrid(int N)
-{
-    int i;
-    int j;
-    char **grid;
-
-    i = 0;
-    j = 0;
-    grid = (char **)ft_memalloc(sizeof(char*) * N);
-    while (i < N)
-    {
-        grid[i] = (char *)ft_memalloc(sizeof(char) * N);
-        grid[i][j] = '.';
-        while(j++ < N)
-        {
-            grid[i][j] = '.';
-        }
-        j = 0;
-        i++;
-    }
-    return (grid);
-}
 
 struct b createSGrid(int N, struct b board)
 {
@@ -64,14 +55,12 @@ struct b createSGrid(int N, struct b board)
     return (board);
 }
 
-struct b createBoard(int num_tets)
+struct b createBoard(int num_tets, int N)
 {
 	struct b board;
 	int tot_pieces;
-	int N;
 
 	tot_pieces = num_tets * 4;
-    N = 2;  
     while (N * N < tot_pieces)
     {
         N += 1;
@@ -166,25 +155,23 @@ int placeTetrimino(int ***tetriminos, struct b grid, int i, int num_tets)
 ** loop through columns first to see isValid
 */
 
-int solver(int num_tets, int ***tetriminos)
+int solver(int num_tets, int ***tetriminos, int N)
 {
     struct b board;
-    int N;
-
-    N = 6;
-    board = createBoard(num_tets);
+    board = createBoard(num_tets, N);
     int i;
 
     i = 0;
     if (placeTetrimino(tetriminos, board, i, num_tets) == 1)
     {
-    	printSolution(N, board);
+    	printSolution(board);
     	return(1);
     }
     else 
     {
-        N = N + 1; 
-        solver(num_tets, tetriminos);
+        free_map(board);
+        N = N + 1;
+        solver(num_tets, tetriminos, N);
     }
     return (0);
 }
