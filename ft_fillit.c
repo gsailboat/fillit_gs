@@ -139,12 +139,14 @@ int		validate_tetrino(char **string_shape)
 		convert_to_dot(string_shape[j]);
 		while (i < 19) //might need to change to 19
 		{
+			//printf("%s %s\n",string_shape[j], valid_tets[i]);
 			if (i == 18 && ft_strcmp(ft_strctrim(string_shape[j]), valid_tets[i]) != 0)
 				return (0);
 			if (ft_strcmp(ft_strctrim(string_shape[j]), valid_tets[i]) == 0)
 				break;
 			i++;
 		}
+		i = 0;
 		j++;
 	}
 	return (1);
@@ -192,8 +194,9 @@ int 	main(int argc, char **argv)
 
 	buf = read_information(file_name);
 	byte_size = b_size(file_name);
-	return_value = is_valid(buf, byte_size);  //need to calculate buff size
+	return_value = is_valid(buf, byte_size);
 	tetrimino_in_file = (ft_tet_split(buf));
+	//printf("%d %d\n",return_value, validate_tetrino(tetrimino_in_file));
 	if (return_value == 0 || validate_tetrino(tetrimino_in_file) == 0)
 	{
 		ft_putstr("error\n");
