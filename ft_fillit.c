@@ -6,7 +6,7 @@
 /*   By: bpatel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 19:16:26 by bpatel            #+#    #+#             */
-/*   Updated: 2016/12/16 15:52:35 by gselbo           ###   ########.fr       */
+/*   Updated: 2016/12/16 13:41:51 by bpatel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,28 @@
 #define BUF_SIZE 4000
 
 //char **valid_tets; <-- clear out variable if not needed.
+
+
+int 	b_size(char* file_name)
+{
+	char buf[BUF_SIZE + 1];
+	int  read_file;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+	int  bytes_read;
+
+	read_file = open(file_name, O_RDWR);
+	if (read_file == -1)
+	{
+		ft_putstr("Error:Something fucked up happend in your code");
+		return (0);
+	}
+	bytes_read = read(read_file, buf, BUF_SIZE);
+	if (close(read_file == -1))
+	{
+		ft_putstr("close() error");
+		return (0);
+	}
+	return (bytes_read);
+}
 
 /*
 **	Read information from a fixed file called "valid_1"
@@ -37,7 +59,6 @@ char 	*read_information(char* file_name)
 		return (NULL);
 	}
 	bytes_read = read(read_file, buf, BUF_SIZE);
-	//printf("%d\n", bytes_read);
 	return_string = ft_strdup(buf);
 	if (close(read_file == -1))
 	{
@@ -46,6 +67,7 @@ char 	*read_information(char* file_name)
 	}
 	return (return_string);
 }
+
 
 /*	
 **	Is_valid will read in the tetrimino and check to see if it is valid
@@ -57,22 +79,26 @@ char 	*read_information(char* file_name)
 
 int    is_valid(char *file, size_t file_buffer)
 {
-   size_t i;
-   size_t real;
+  size_t i;
+  size_t real;
 
-   i = 4;
-   real = file_buffer + 1;
-   while (file[i] == '\n' && i < real)
-   {
-       if (file[i + 5] == '\n')
-           i += 5;
-       else if (file[i + 1] == '\n')
-           i += 6;
-       else if (file[i + 1] == '\0' && real % 21 == 0)
-           return (1);
-   }
-   return (0);
+  i = 4;
+  real = file_buffer + 1;
+  while (file[i] == '\n' && i < real)
+  {
+      if (file[i + 5] == '\n')
+          i += 5;
+      else if (file[i + 1] == '\n')
+          i += 6;
+      else if (file[i + 1] == '\0' && real % 21 == 0)
+      	return (1);
+      else
+      	break;
+  }
+  return (0);
 }
+
+
 
 /*	
 ** Function will convert each new line char into a dot to determine
@@ -111,7 +137,7 @@ int		validate_tetrino(char **string_shape)
 	while (string_shape[j] != 0)
 	{
 		convert_to_dot(string_shape[j]);
-		while (i < 19)
+		while (i < 19) //might need to change to 19
 		{
 			if (i == 18 && ft_strcmp(ft_strctrim(string_shape[j]), valid_tets[i]) != 0)
 				return (0);
@@ -153,6 +179,7 @@ int 	main(int argc, char **argv)
 	char **trimmed_tetrimino;
 	int return_value;
 	int ***test_array;
+	int byte_size;
 
 
 	//reads in file and checks to see if argument value is correct
@@ -162,26 +189,22 @@ int 	main(int argc, char **argv)
 		ft_putstr("wrong number of inputs: try again");
 		return (0);
 	}
-	//input file read into 'buf'
+
 	buf = read_information(file_name);
-
-	//running the is_valid function to see if the input file is correctly 
-	//outputting valid 4x4 pieces 
-	return_value = is_valid(buf, 41);  //need to calculate buff size
-	printf("%d", return_value); 
-
-	//assign the tetriminos into a 2d array to validate the pieces.
+	byte_size = b_size(file_name);
+	return_value = is_valid(buf, byte_size);  //need to calculate buff size
 	tetrimino_in_file = (ft_tet_split(buf));
+	if (return_value == 0 || validate_tetrino(tetrimino_in_file) == 0)
+	{
+		ft_putstr("error\n");
+		return (0);
+	}
+	else
+	{
 
-	//run the validate_tet function to do a string compare against
-	//predefined tetriminos set up in ft_valid_tet.c
-	validate_tetrino((tetrimino_in_file));
-
-	//run a test on trim tetriminos
-	trimmed_tetrimino = trim_tetriminos(tetrimino_in_file, ft_tit_count(buf));
-
-	//run a test on tet_coor
-	test_array = ft_tet_coor(trimmed_tetrimino, ft_tit_count(buf));
-	solver(ft_tit_count(buf), test_array);
+		trimmed_tetrimino = trim_tetriminos(tetrimino_in_file, ft_tit_count(buf));
+		test_array = ft_tet_coor(trimmed_tetrimino, ft_tit_count(buf));
+		solver(ft_tit_count(buf), test_array, 2);
+	}
 
 }

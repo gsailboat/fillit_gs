@@ -1,0 +1,229 @@
+
+
+1) Start in the leftmost column
+2) If all tetriminos are placed
+    return true
+3) Try all columns in the current row.  Do following for every tried column.
+    a) If the tetrimino can be placed safely in this column then mark this [row, 
+        column] as part of the solution and recursively check if placing  
+        tetrimino here leads to a solution.
+    b) If placing tetrimino in [row, column] leads to a solution then return 
+        true.
+    c) If placing tetrimino doesn't lead to a solution then umark this [row, 
+        column] 
+4) If all columns have been tried and nothing worked, move to the next row.
+5) Try all rows in the current column.  Do following for every tried row.
+    a) If the tetrimino can be placed safely in this row then mark this [row, 
+        column] as part of the solution and recursively check if placing  
+        tetrimino here leads to a solution.
+    b) If placing tetrimino in [row, column] leads to a solution then return 
+        true.
+    c) If placing tetrimino doesn't lead to a solution then umark this [row, 
+        column] (Backtrack) and go to step (a) to try other rows.
+6) If all rows have been tried and nothing worked, return false to trigger 
+    backtracking.
+
+
+//Functions:
+
+1. Solver function 
+2. Placed Safely function 
+	- 
+
+
+
+
+//Thoughts:
+1. Once a piece has been placed, the remaining pieces coordinates need to increment. 
+	- increment will first happen on the pieces column coordinate by { ...... }
+
+
+    // printf(" %d,", test_array[0][0][0]);
+    // printf("%d ", test_array[0][0][1]);
+    // printf("%d,", test_array[0][1][0]);
+    // printf("%d ", test_array[0][1][1]);
+    // printf("%d,", test_array[0][2][0]);
+    // printf("%d ", test_array[0][2][1]);
+    // printf("%d,", test_array[0][3][0]);
+    // printf("%d\n ", test_array[0][3][1]);
+
+    // printf("%d,", test_array[1][0][0]);
+    // printf("%d ", test_array[1][0][1]);
+    // printf("%d,", test_array[1][1][0]);
+    // printf("%d ", test_array[1][1][1]);
+    // printf("%d,", test_array[1][2][0]);
+    // printf("%d ", test_array[1][2][1]);
+    // printf("%d,", test_array[1][3][0]);
+    // printf("%d\n ", test_array[1][3][1]);
+
+    // printf("%d,", test_array[2][0][0]);
+    // printf("%d ", test_array[2][0][1]);
+    // printf("%d,", test_array[2][1][0]);
+    // printf("%d ", test_array[2][1][1]);
+    // printf("%d,", test_array[2][2][0]);
+    // printf("%d ", test_array[2][2][1]);
+    // printf("%d,", test_array[2][3][0]);
+    // printf("%d\n ", test_array[2][3][1]);
+
+    // printf("%d,", test_array[3][0][0]);
+    // printf("%d ", test_array[3][0][1]);
+    // printf("%d,", test_array[3][1][0]);
+    // printf("%d ", test_array[3][1][1]);
+    // printf("%d,", test_array[3][2][0]);
+    // printf("%d ", test_array[3][2][1]);
+    // printf("%d,", test_array[3][3][0]);
+    // printf("%d\n ", test_array[3][3][1]);
+
+
+//information pieces 
+    1. Tetrimino Pieces 
+    2. Coordinates of Tetriminos in a 2D test_array
+    3. Minimum grid size: N
+    4. 
+
+
+void    printBoard()
+{
+
+
+
+}
+
+
+char **createGrid(int N)
+{
+ //creates grid based off minimium N value that is 
+ //calculated by tetrimino pieces. Returns a grid filled with 'O'
+    int i;
+    int j;
+    char **grid;
+
+    i = 0;
+    j = 0;
+    grid = (char **)ft_memalloc(sizeof(char*) * rac);
+    while (i < rac)
+    {
+        grid[i] = (char *)ft_memalloc(sizeof(char) * rac);
+        grid[i][j] = '0';
+        while(j++ < rac)
+        {
+            grid[i][j] = '0';
+        }
+        j = 0;
+        i++;
+    }
+    return (grid);
+}
+
+
+int isValid(int row, int col, int **tetrimino, char **board, int N)
+{
+  /*Will check to see if the placement of the piece is within the 
+    bounds of the grid and checks to see if all the pieces are plotted 
+    in an unmarked point*/
+
+  //will add the row and column to the tetrimino pieces -> check to see if they are not 
+  //outside the board bounds && will also check to see if coordinates of pieces are currently
+  //set to '0' -> will return (1) if conditions are met else return (0)
+
+    int piece;
+    int c_row;
+    int c_col;
+
+    piece = 0;
+    while (piece < 4)
+    {
+        //obtain the coordinates of the piece
+        row = tetrimino[piece][0]; 
+        col = tetrimino[piece][1];
+        //printf("%d %d\n", row, col);
+        if (board[c_row + row][c_col + col] != '0')
+            return (0);
+        if ((c_row + row) >= N || (c_col + col) >= N)
+            return(0);
+        piece++;
+    }
+    return (1);
+
+}
+
+int placeTetrimino(int *tetrimino[i], int N)
+{
+    //base case if all tetriminos have been placed return (1)
+    //loop through columns first and check to see isValid ->place the piece -> call placeTetrimino with next piece
+    //if false run clearTetrimino for current piece 
+    //move to the next row if column hits bounds
+    //returns false if not complete 
+
+    int row;
+    int col;
+
+    row = 0;
+    col = 0;
+    while (row < N)
+    {
+        while (col < N)
+        {
+            if (isValid(row, col, tetrimino[i], board, N))
+            {
+                board[row + *terimino[i][0]][col + *teriminio[i][1]] = i + 'A';
+                if(placeTetrimino(*tetrimino[i + 1], N))
+                    return (1);
+                board[row + *terimino[i][0]][col + *teriminio[i][1]] = i + '0';
+            }
+            col++
+        }
+        col = 0;
+        row++;
+    }
+    return (0);
+
+}
+
+int solver(int N, int ***tetriminos, int num_tets)
+{
+    /* if base case return 1 and end which is all tetrminos have been plotted
+    loop through columns first to see isValid*/
+    char **board;
+    board = createGrid(N);
+    int i;
+
+    if (!*tetriminos[i])
+        return(1);
+    while(*tetriminos[i])
+    {
+        if (placeTetrimino(*tetriminos[i]))
+             i++;
+        else
+            break;
+    }
+    return (0);
+}
+
+int mainSolver(int num_of_tetriminos)
+{
+    int tot_pieces;
+    int N;
+    char **board;
+
+    tot_pieces = num_of_tetriminos * 4;
+    N = 1;
+    while (N * N < tot_pieces)
+    {
+        N += 1;
+    }
+    if (solver == 1)
+    {
+        printBoard();
+    }
+    else 
+    {
+        n = n + 1; <--increase grid size
+        solver(int n);
+    }
+}
+
+
+
+
+

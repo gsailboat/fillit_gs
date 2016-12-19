@@ -87,7 +87,7 @@ int		***ft_tet_coor(char **minos, int tetri)
 			}
 			x++;
 		}
-	tet++;
+		tet++;
 	}
 	return (cord);
 }

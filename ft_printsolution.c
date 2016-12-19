@@ -18,21 +18,23 @@
 ** Prints out the board once the solver returns a true value. 
 */
 
-void	printSolution(int N, struct b grid)
+void	printSolution(struct b grid)
 {
     int i;
     int j;
+    int N;
 
     i = 0;
     j = 0;
+    N = grid.b_size;
     while (i < N)
     {
         while(j < N)
         {
-            printf("%c", grid.bd[i][j]);
+            ft_putchar(grid.bd[i][j]);
             j++;
         }
-        printf("\n");
+        ft_putchar('\n');
         j = 0;
         i++;
     }

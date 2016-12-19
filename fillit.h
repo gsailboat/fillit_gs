@@ -58,8 +58,8 @@ char     	*ft_istwonew(const char *s, size_t num_words);
 char		**valid_tetrimino(void);
 int			***ft_tet_coor(char **minos, int tetri);
 int			isSafe(char **board, int **tetri, int row, int col);
-int 		solver(int num_tets, int ***tetriminos);
-void		printSolution(int N, struct b grid);
+int 		solver(int num_tets, int ***tetriminos, int N);
+void		printSolution(struct b grid);
 int 		board_size(char **board);
 
 #endif
