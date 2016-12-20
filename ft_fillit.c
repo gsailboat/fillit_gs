@@ -79,26 +79,32 @@ char 	*read_information(char* file_name)
 
 int    is_valid(char *file, size_t file_buffer)
 {
-  size_t i;
-  size_t real;
+ size_t i;
+ size_t j;
+ size_t real;
 
-  i = 4;
-  real = file_buffer + 1;
-  while (file[i] == '\n' && i < real)
-  {
-      if (file[i + 5] == '\n')
-          i += 5;
-      else if (file[i + 1] == '\n')
-          i += 6;
-      else if (file[i + 1] == '\0' && real % 21 == 0)
-      	return (1);
-      else
-      	break;
-  }
-  return (0);
+ i = 4;
+ j = 0;
+ real = file_buffer + 1;
+ while (file[i] == '\n' && i < real)
+ {
+     if (file[i + 5] == '\n' && j < 4)
+     {
+         i += 5;
+         j++;
+     }
+     else if (file[i + 1] == '\n')
+     {
+         i += 6;
+         j = 0;
+     }
+     else if (file[i + 1] == '\0' && real % 21 == 0)
+         return (1);
+     else
+         break;
+ }
+ return (0);
 }
-
-
 
 /*	
 ** Function will convert each new line char into a dot to determine
